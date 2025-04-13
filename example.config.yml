@@ -1,0 +1,4 @@
+x_credentials:
+  username: "name_here"  # Your X login username
+  password: "pass_here"  # Your X login password
+  account_name: "name_here"  # Optional, only used for log identification

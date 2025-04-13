@@ -1,0 +1,7 @@
+config.yml
+*.log
+follower.js
+follower.json
+followers.txt
+failed_urls.txt
+failed_urls2.txt
